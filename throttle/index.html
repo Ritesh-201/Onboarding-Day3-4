@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttle Scroll Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #scroll-area {
+      height: 400px;
+      overflow-y: scroll;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    #result {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 18px;
+      background: #f0f0f0;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Throttled Scroll Event</h1>
+  <div id="scroll-area">
+    <p>Scroll down to see more content...</p>
+    <div style="height: 2000px;"> <!-- Tall content to enable scrolling -->
+      <p>Keep scrolling...</p>
+      <p>Almost there...</p>
+      <p>You're at the bottom!</p>
+    </div>
+  </div>
+  <div id="result">Scroll position: 0px</div>
+  <script src="script.js"></script>
+</body>
+</html>
