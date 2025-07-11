@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Array Methods & LocalStorage Assignment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 8px;
+      margin: 5px;
+      font-size: 16px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Todo App with Custom Array Methods & LocalStorage</h1>
+  <div>
+    <input type="text" id="todo-text" placeholder="Enter todo...">
+    <select id="todo-priority">
+      <option value="low">Low</option>
+      <option value="high">High</option>
+    </select>
+    <button id="add-todo">Add Todo</button>
+    <button id="show-high-priority">Show High Priority</button>
+    <button id="count-completed">Count Completed</button>
+  </div>
+  <ul id="todo-list"></ul>
+  <div id="result">Results will appear here</div>
+  <script src="script.js"></script>
+</body>
+</html>
