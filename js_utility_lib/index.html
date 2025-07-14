@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Utility Library</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="mobile-header">
+    <h2><i class="fas fa-code"></i> JS Utility Library</h2>
+    <button class="hamburger-menu" id="hamburger-menu" aria-label="Toggle menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Sidebar Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <div class="sidebar" id="sidebar">
+    <h2 class="sidebar-title"><i class="fas fa-code"></i> JS Utility Library</h2>
+    <ul>
+      <li><a href="#" class="nav-link active" data-section="home">
+        <i class="fas fa-home"></i> Home
+      </a></li>
+      
+      <!-- Core Utilities -->
+      <li class="nav-category">Core Utilities</li>
+      <li><a href="#" class="nav-link" data-section="debounce">
+        <i class="fas fa-clock"></i> Debounce
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="throttle">
+        <i class="fas fa-tachometer-alt"></i> Throttle
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="promises">
+        <i class="fas fa-link"></i> Promises
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="type-checks">
+        <i class="fas fa-check-circle"></i> Type Checks
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="array-methods">
+        <i class="fas fa-list"></i> Array Methods
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="deep-merge">
+        <i class="fas fa-layer-group"></i> Deep Merge
+      </a></li>
+      
+      <!-- Interactive Components -->
+      <li class="nav-category">Interactive Components</li>
+      <li><a href="#" class="nav-link" data-section="calculator">
+        <i class="fas fa-calculator"></i> Calculator
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="todo">
+        <i class="fas fa-tasks"></i> Todo App
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="tic-tac-toe">
+        <i class="fas fa-th-large"></i> Tic-Tac-Toe
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="api-fetch">
+        <i class="fas fa-cloud-download-alt"></i> API Fetch Demo
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="password-generator">
+        <i class="fas fa-key"></i> Password Generator
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="json-formatter">
+        <i class="fas fa-code"></i> JSON Formatter
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="color-picker">
+        <i class="fas fa-palette"></i> Color Picker
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="password-manager">
+        <i class="fas fa-lock"></i> Personal Password Manager
+      </a></li>
+    </ul>
+  </div>
+
+  
+  <div class="main-content">
+
+    <div id="home" class="landing-page">
+      <h1><i class="fas fa-rocket"></i> JS Utility Library</h1>
+      <p>A comprehensive collection of JavaScript utilities, interactive components, and common functions. Save development time with our modern, well-tested utility functions and ready-to-use components.</p>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <i class="fas fa-bolt"></i>
+          <h3>Performance</h3>
+          <p>Optimized utilities like debounce and throttle</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-gamepad"></i>
+          <h3>Interactive</h3>
+          <p>Ready-to-use components and games</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-tools"></i>
+          <h3>Developer Tools</h3>
+          <p>JSON formatter, password generator, and more</p>
+        </div>
+        <!-- <div class="feature-card">
+          <i class="fas fa-cloud"></i>
+          <h3>API Integration</h3>
+          <p>Fetch utilities with real API examples</p>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Debounce Section -->
+    <div id="debounce" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-clock"></i> Debounce</h2>
+        <p>Delay function execution until after a specified time has passed since the last invocation</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">debounce.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const debounce = (func, delay) =&gt; {
+  let timeoutId;
+  return (...args) =&gt; {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() =&gt; func(...args), delay);
+  };
+};
+
+// Usage Example
+const handleSearch = (query) =&gt; {
+  console.log('Searching for:', query);
+};
+
+const debouncedSearch = debounce(handleSearch, 500);
+
+// This will only execute once after 500ms
+debouncedSearch('hello');
+debouncedSearch('hello world');</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try it out</h3>
+          <div class="input-group">
+            <label>Type to test debounce (500ms delay):</label>
+            <input type="text" id="debounce-input" placeholder="Start typing...">
+          </div>
+          <div class="result-box" id="debounce-result">Results will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator Section -->
+    <div id="calculator" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-calculator"></i> Calculator</h2>
+        <p>A fully functional calculator with basic arithmetic operations</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">calculator.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">class Calculator {
+  constructor() {
+    this.display = '';
+    this.previousValue = null;
+    this.operation = null;
+    this.waitingForInput = false;
+  }
+
+  inputNumber(number) {
+    if (this.waitingForInput) {
+      this.display = number;
+      this.waitingForInput = false;
+    } else {
+      this.display = this.display === '0' ? number : this.display + number;
+    }
+  }
+
+  inputOperation(nextOperation) {
+    const inputValue = parseFloat(this.display);
+    if (this.previousValue === null) {
+      this.previousValue = inputValue;
+    } else if (this.operation) {
+      const currentValue = this.previousValue || 0;
+      const newValue = this.calculate(currentValue, inputValue, this.operation);
+      this.display = String(newValue);
+      this.previousValue = newValue;
+    }
+    this.waitingForInput = true;
+    this.operation = nextOperation;
+  }
+
+  calculate(firstValue, secondValue, operation) {
+    switch (operation) {
+      case '+': return firstValue + secondValue;
+      case '-': return firstValue - secondValue;
+      case '×': return firstValue * secondValue;
+      case '÷': return firstValue / secondValue;
+      case '=': return secondValue;
+      default: return secondValue;
+    }
+  }
+
+  clear() {
+    this.display = '0';
+    this.previousValue = null;
+    this.operation = null;
+    this.waitingForInput = false;
+  }
+}
+
+// Usage: Create calculator instance and update display
+const calculator = new Calculator();
+
+const updateCalcDisplay = () =&gt; {
+  document.getElementById('calc-display').textContent = calculator.display;
+};
+
+// HTML needed: Display element with id="calc-display" and buttons with onclick handlers</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Interactive Calculator</h3>
+          <div class="calculator">
+            <div class="calculator-display">
+              <span id="calc-display">0</span>
+            </div>
+            <div class="calculator-buttons">
+              <button class="calc-btn clear">C</button>
+              <button class="calc-btn">÷</button>
+              <button class="calc-btn">×</button>
+              <button class="calc-btn">-</button>
+              
+              <button class="calc-btn">7</button>
+              <button class="calc-btn">8</button>
+              <button class="calc-btn">9</button>
+              <button class="calc-btn" rowspan="2">+</button>
+              
+              <button class="calc-btn">4</button>
+              <button class="calc-btn">5</button>
+              <button class="calc-btn">6</button>
+              
+              <button class="calc-btn">1</button>
+              <button class="calc-btn">2</button>
+              <button class="calc-btn">3</button>
+              <button class="calc-btn equals" rowspan="2">=</button>
+              
+              <button class="calc-btn zero" colspan="2">0</button>
+              <button class="calc-btn">.</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Todo App Section -->
+    <div id="todo" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-tasks"></i> Todo Application</h2>
+        <p>A complete todo application with add, edit, delete, and filter functionality</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">todo.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">class TodoApp {
+  constructor() {
+    this.todos = [];
+    this.filter = 'all';
+    this.nextId = 1;
+  }
+
+  addTodo(text) {
+    if (text.trim() === '') return;
+    
+    const todo = {
+      id: this.nextId++,
+      text: text.trim(),
+      completed: false,
+      timestamp: new Date()
+    };
+    
+    this.todos.push(todo);
+    this.render();
+  }
+
+  toggleTodo(id) {
+    const todo = this.todos.find(t =&gt; t.id === id);
+    if (todo) {
+      todo.completed = !todo.completed;
+      this.render();
+    }
+  }
+
+  deleteTodo(id) {
+    this.todos = this.todos.filter(t =&gt; t.id !== id);
+    this.render();
+  }
+
+  editTodo(id, newText) {
+    const todo = this.todos.find(t =&gt; t.id === id);
+    if (todo && newText.trim() !== '') {
+      todo.text = newText.trim();
+      this.render();
+    }
+  }
+
+  setFilter(filter) {
+    this.filter = filter;
+    this.render();
+  }
+
+  getFilteredTodos() {
+    switch (this.filter) {
+      case 'active': return this.todos.filter(t =&gt; !t.completed);
+      case 'completed': return this.todos.filter(t =&gt; t.completed);
+      default: return this.todos;
+    }
+  }
+
+  clearCompleted() {
+    this.todos = this.todos.filter(t =&gt; !t.completed);
+    this.render();
+  }
+
+  render() {
+    const todoList = document.getElementById('todo-list');
+    const todoCount = document.getElementById('todo-count');
+    
+    // Update count
+    const activeCount = this.todos.filter(t =&gt; !t.completed).length;
+    todoCount.textContent = `${activeCount} item${activeCount !== 1 ? 's' : ''} left`;
+    
+    // Render todos
+    todoList.innerHTML = this.getFilteredTodos().map(todo =&gt; `
+      &lt;div class="todo-item ${todo.completed ? 'completed' : ''}"&gt;
+        &lt;input type="checkbox" ${todo.completed ? 'checked' : ''} 
+               onchange="todoApp.toggleTodo(${todo.id})"&gt;
+        &lt;span class="todo-text" ondblclick="editTodo(${todo.id})"&gt;${todo.text}&lt;/span&gt;
+        &lt;button onclick="todoApp.deleteTodo(${todo.id})"&gt;Delete&lt;/button&gt;
+      &lt;/div&gt;
+    `).join('');
+  }
+}
+
+// Usage
+const todoApp = new TodoApp();
+
+const addTodo = () =&gt; {
+  const input = document.getElementById('todo-input');
+  todoApp.addTodo(input.value);
+  input.value = '';
+};
+
+const clearCompleted = () =&gt; todoApp.clearCompleted();
+
+// HTML needed: input with id="todo-input", container with id="todo-list", 
+// span with id="todo-count", and filter buttons with data-filter attributes</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <div class="todo-app">
+            <div class="todo-header">
+              <div class="todo-input-container">
+                <input type="text" id="todo-input" placeholder="Add a new task..." maxlength="100">
+                <button id="add-todo-btn">
+                  <i class="fas fa-plus"></i> Add
+                </button>
+              </div>
+              <div class="todo-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+              </div>
+            </div>
+            <div class="todo-list" id="todo-list">
+        
+            </div>
+            <div class="todo-footer">
+              <span id="todo-count">0 items left</span>
+              <button id="clear-completed">Clear Completed</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tic-Tac-Toe Section -->
+    <div id="tic-tac-toe" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-th-large"></i> Tic-Tac-Toe Game</h2>
+        <p>Classic tic-tac-toe game with win detection and score tracking</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">tic-tac-toe.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">class TicTacToe {
+  constructor() {
+    this.board = Array(9).fill('');
+    this.currentPlayer = 'X';
+    this.gameActive = true;
+    this.score = { X: 0, O: 0, draws: 0 };
+    this.winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+      [0, 4, 8], [2, 4, 6] // diagonals
+    ];
+  }
+
+  makeMove(cellIndex) {
+    if (this.board[cellIndex] !== '' || !this.gameActive) return false;
+    
+    this.board[cellIndex] = this.currentPlayer;
+    
+    if (this.checkWinner()) {
+      this.gameActive = false;
+      this.score[this.currentPlayer]++;
+      this.updateDisplay(`Player ${this.currentPlayer} wins!`);
+    } else if (this.board.every(cell =&gt; cell !== '')) {
+      this.gameActive = false;
+      this.score.draws++;
+      this.updateDisplay("It's a draw!");
+    } else {
+      this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+      this.updateDisplay(`Player ${this.currentPlayer}'s turn`);
+    }
+    
+    this.renderBoard();
+    this.updateScore();
+    return true;
+  }
+
+  checkWinner() {
+    return this.winPatterns.some(pattern =&gt; {
+      const [a, b, c] = pattern;
+      return this.board[a] && 
+             this.board[a] === this.board[b] && 
+             this.board[a] === this.board[c];
+    });
+  }
+
+  resetGame() {
+    this.board = Array(9).fill('');
+    this.currentPlayer = 'X';
+    this.gameActive = true;
+    this.renderBoard();
+    this.updateDisplay(`Player ${this.currentPlayer}'s turn`);
+  }
+
+  resetScore() {
+    this.score = { X: 0, O: 0, draws: 0 };
+    this.updateScore();
+  }
+
+  renderBoard() {
+    this.board.forEach((cell, index) =&gt; {
+      const cellElement = document.querySelector(`[data-cell="${index}"]`);
+      if (cellElement) cellElement.textContent = cell;
+    });
+  }
+
+  updateDisplay(message) {
+    const messageElement = document.getElementById('game-message');
+    if (messageElement) messageElement.textContent = message;
+    
+    const currentPlayerElement = document.getElementById('current-player');
+    if (currentPlayerElement) currentPlayerElement.textContent = this.currentPlayer;
+  }
+
+  updateScore() {
+    ['X', 'O', 'draws'].forEach(key =&gt; {
+      const element = document.getElementById(`score-${key.toLowerCase()}`);
+      if (element) element.textContent = this.score[key] || this.score.draws;
+    });
+  }
+}
+
+// Usage
+const ticTacToe = new TicTacToe();
+
+const makeMove = (index) =&gt; ticTacToe.makeMove(index);
+const resetGame = () =&gt; ticTacToe.resetGame();
+const resetScore = () =&gt; ticTacToe.resetScore();
+
+// HTML needed: 9 cells with data-cell="0-8" attributes, spans with ids for score display,
+// current player display, and game message area</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <div class="tic-tac-toe">
+            <div class="game-info">
+              <div class="current-player">
+                Current Player: <span id="current-player">X</span>
+              </div>
+              <div class="score">
+                X: <span id="score-x">0</span> | O: <span id="score-o">0</span> | Draws: <span id="score-draw">0</span>
+              </div>
+            </div>
+            <div class="game-board" id="game-board">
+              <div class="cell" data-cell="0"></div>
+              <div class="cell" data-cell="1"></div>
+              <div class="cell" data-cell="2"></div>
+              <div class="cell" data-cell="3"></div>
+              <div class="cell" data-cell="4"></div>
+              <div class="cell" data-cell="5"></div>
+              <div class="cell" data-cell="6"></div>
+              <div class="cell" data-cell="7"></div>
+              <div class="cell" data-cell="8"></div>
+            </div>
+            <div class="game-controls">
+              <button>Reset Game</button>
+              <button>Reset Score</button>
+            </div>
+            <div id="game-status" class="game-message"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API Fetch Demo Section -->
+    <div id="api-fetch" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-cloud-download-alt"></i> API Fetch Demo</h2>
+        <p>Fetch data from external APIs with error handling and loading states</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">api-fetch.js - Using https://api.api-ninjas.com/v1/</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">class ApiFetcher {
+  constructor() {
+    this.baseUrl = '';
+  }
+
+  async fetchWithTimeout(url, options = {}, timeout = 5000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() =&gt; controller.abort(), timeout);
+    
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      throw error;
+    }
+  }
+
+  async fetchQuote() {
+    this.showLoading();
+    try {
+      const response = await this.fetchWithTimeout('https://api.api-ninjas.com/v1/quotes', {
+        headers: { 'X-Api-Key': 'YOUR_API_KEY' }
+      });
+      const data = await response.json();
+      const quote = data[0]; // API-Ninjas returns an array
+      this.showResult(`
+        &lt;h3&gt;Random Quote (API-Ninjas)&lt;/h3&gt;
+        &lt;p&gt;"${quote.quote}"&lt;/p&gt;
+        &lt;p&gt;&lt;strong&gt;- ${quote.author}&lt;/strong&gt;&lt;/p&gt;
+        &lt;small&gt;Category: ${quote.category}&lt;/small&gt;
+      `);
+    } catch (error) {
+      this.showError('Failed to fetch quote: ' + error.message);
+    }
+  }
+
+  async fetchJoke() {
+    this.showLoading();
+    try {
+      const response = await this.fetchWithTimeout('https://api.api-ninjas.com/v1/jokes', {
+        headers: { 'X-Api-Key': 'YOUR_API_KEY' }
+      });
+      const data = await response.json();
+      const joke = data[0]; // API-Ninjas returns an array
+      this.showResult(`
+        &lt;h3&gt;Random Joke (API-Ninjas)&lt;/h3&gt;
+        &lt;p&gt;${joke.joke}&lt;/p&gt;
+      `);
+    } catch (error) {
+      this.showError('Failed to fetch joke: ' + error.message);
+    }
+  }
+
+  async fetchFact() {
+    this.showLoading();
+    try {
+      const response = await this.fetchWithTimeout('https://api.api-ninjas.com/v1/facts', {
+        headers: { 'X-Api-Key': 'YOUR_API_KEY' }
+      });
+      const data = await response.json();
+      const fact = data[0]; // API-Ninjas returns an array
+      this.showResult(`
+        &lt;h3&gt;Random Fact (API-Ninjas)&lt;/h3&gt;
+        &lt;p&gt;${fact.fact}&lt;/p&gt;
+      `);
+    } catch (error) {
+      this.showError('Failed to fetch fact: ' + error.message);
+    }
+  }
+}
+
+  showLoading() {
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('api-content');
+    if (loading) loading.style.display = 'block';
+    if (content) content.innerHTML = '';
+  }
+
+  showResult(html) {
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('api-content');
+    if (loading) loading.style.display = 'none';
+    if (content) content.innerHTML = html;
+  }
+
+  showError(message) {
+    const loading = document.getElementById('loading');
+    const content = document.getElementById('api-content');
+    if (loading) loading.style.display = 'none';
+    if (content) content.innerHTML = `&lt;p style="color: #ff6b6b;"&gt;${message}&lt;/p&gt;`;
+  }
+}
+
+// Usage
+const apiFetcher = new ApiFetcher();
+
+const fetchQuote = () =&gt; apiFetcher.fetchQuote();
+const fetchJoke = () =&gt; apiFetcher.fetchJoke();
+const fetchFact = () =&gt; apiFetcher.fetchFact();
+
+// HTML needed: buttons for each fetch function, loading div with id="loading",
+// content div with id="api-content" for displaying results</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <div class="api-demo">
+            <div class="api-controls">
+              <button>Get Random Quote</button>
+              <button>Get Random Joke</button>
+              <button>Get Random Fact</button>
+            </div>
+            <div class="api-result" id="api-result">
+              <div class="loading" id="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> Loading...
+              </div>
+              <div id="api-content">Click a button above to fetch data!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Throttle Section -->
+    <div id="throttle" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-tachometer-alt"></i> Throttle</h2>
+        <p>Limit function execution to once per specified time interval</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">throttle.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const throttle = (func, limit) =&gt; {
+  let lastCall = 0;
+  return (...args) =&gt; {
+    const now = Date.now();
+    if (now - lastCall &gt;= limit) {
+      lastCall = now;
+      func(...args);
+    }
+  };
+};
+
+// Usage Example
+const handleScroll = () =&gt; {
+  console.log('Scroll position:', window.scrollY);
+};
+
+const throttledScroll = throttle(handleScroll, 100);
+window.addEventListener('scroll', throttledScroll);</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try it out</h3>
+          <p>Scroll in the area below (throttled to 100ms):</p>
+          <div class="scroll-area" id="scroll-area" style="height: 200px; overflow-y: scroll; border: 1px solid #555; background-color: #1a1a1a; padding: 20px; border-radius: 4px;">
+            <div class="scroll-content" style="height: 1000px; background: linear-gradient(45deg, #2d2d2d 25%, transparent 25%), linear-gradient(-45deg, #2d2d2d 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #2d2d2d 75%), linear-gradient(-45deg, transparent 75%, #2d2d2d 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; display: flex; align-items: center; justify-content: center; color: #cccccc; font-size: 1.2em;">
+              Scroll me to see throttling in action!
+            </div>
+          </div>
+          <div class="result-box" id="throttle-result">Scroll events will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promises Section -->
+    <div id="promises" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-link"></i> Promise Chain</h2>
+        <p>Sequential API calls for fetching quotes by categories</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">promiseChain.js - API: https://api.api-ninjas.com/v1/quotes</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const promiseUtils = {
+  // Fetch multiple quotes concurrently using Promise.all
+  fetchMultipleQuotes: async (count = 3) => {
+    const promises = [];
+    
+    // Create multiple concurrent API requests
+    for (let i = 0; i &lt; count; i++) {
+      promises.push(
+        fetch('https://api.api-ninjas.com/v1/quotes', {
+          headers: { 'X-Api-Key': 'YOUR_API_KEY' }
+        }).then(response => response.json())
+          .then(data => ({
+            quote: data[0].quote,
+            author: data[0].author,
+            id: i + 1
+          }))
+      );
+    }
+    
+    // Execute all promises concurrently with Promise.all
+    return await Promise.all(promises);
+  }
+};
+
+// Usage - demonstrates concurrent API calls
+const quotes = await promiseUtils.fetchMultipleQuotes(5);
+console.log('Fetched', quotes.length, 'quotes concurrently!');</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try Promise.all Demo</h3>
+          <div class="input-group">
+            <label for="quote-count">Number of quotes to fetch concurrently:</label>
+            <select id="quote-count">
+              <option value="3">3 Quotes</option>
+              <option value="5">5 Quotes</option>
+              <option value="7">7 Quotes</option>
+            </select>
+            <small>Demonstrates Promise.all with multiple concurrent API calls</small>
+          </div>
+          <button id="fetch-quotes-btn" class="btn-fetch">
+            <i class="fas fa-download"></i> Fetch Quotes (Promise.all)
+          </button>
+          <div class="quotes-container" id="quotes-result" style="max-height: 400px; overflow-y: auto;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Type Checks Section -->
+    <div id="type-checks" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-check-circle"></i> Type Checks</h2>
+        <p>Reliable type checking utilities for JavaScript values</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">typeChecks.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const typeChecks = {
+  isArray: (value) =&gt; Array.isArray(value),
+  isObject: (value) =&gt; 
+    value &amp;&amp; typeof value === "object" &amp;&amp; !Array.isArray(value),
+  isString: (value) =&gt; typeof value === "string",
+  isNumber: (value) =&gt; typeof value === "number" &amp;&amp; !isNaN(value),
+  isFunction: (value) =&gt; typeof value === "function",
+  isBoolean: (value) =&gt; typeof value === "boolean",
+  isNull: (value) =&gt; value === null,
+  isUndefined: (value) =&gt; value === undefined,
+  isEmpty: (value) =&gt; {
+    if (value === null || value === undefined) return true;
+    if (typeof value === 'string' || Array.isArray(value)) 
+      return value.length === 0;
+    if (typeof value === 'object') 
+      return Object.keys(value).length === 0;
+    return false;
+  }
+};
+
+// Usage Examples
+typeChecks.isArray([1, 2, 3]);     // true
+typeChecks.isObject({a: 1});       // true
+typeChecks.isString("hello");      // true
+typeChecks.isEmpty("");            // true</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try it out</h3>
+          <div class="input-group">
+            <label>Enter a value to check its type:</label>
+            <input type="text" id="type-input" placeholder='e.g., [1,2,3] or "hello" or 42'>
+          </div>
+          <button>Check Type</button>
+          <div class="result-box" id="type-result">Type check results will appear here...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Array Methods Section -->
+    <div id="array-methods" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-list"></i> Array Methods</h2>
+        <p>Enhanced array manipulation utilities</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">arrayMethods.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const arrayUtils = {
+  // Map: Transform each element (multiply by 2)
+  map: (array) =&gt; array.map(x =&gt; x * 2),
+  
+  // Filter: Keep only even numbers
+  filter: (array) =&gt; array.filter(x =&gt; x % 2 === 0),
+  
+  // Reduce: Sum all elements
+  reduce: (array) =&gt; array.reduce((sum, x) =&gt; sum + x, 0),
+  
+  // Flatten: Flatten nested arrays
+  flatten: (array) =&gt; {
+    return array.reduce((acc, val) =&gt; 
+      Array.isArray(val) ? 
+        acc.concat(arrayUtils.flatten(val)) : 
+        acc.concat(val), []);
+  },
+  
+  // Unique: Remove duplicate elements
+  unique: (array) =&gt; [...new Set(array)]
+};</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try it out</h3>
+          <div class="input-group">
+            <label>Select method:</label>
+            <select id="array-method">
+              <option value="map">Map</option>
+              <option value="filter">Filter</option>
+              <option value="reduce">Reduce</option>
+              <option value="flatten">Flatten</option>
+              <option value="unique">Unique</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Input array:</label>
+            <textarea id="array-input" placeholder='[1, 2, 3, 4, 5, 6]'></textarea>
+          </div>
+          <div class="input-group" id="extra-param" style="display: none;">
+            <label id="param-label">Parameter:</label>
+            <input type="text" id="param-input" placeholder="">
+          </div>
+          <button>Execute Method</button>
+          <div class="result-box" id="array-result">Select a method and enter an array...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deep Merge Section -->
+    <div id="deep-merge" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-layer-group"></i> Deep Merge</h2>
+        <p>Recursively merge objects while preserving nested structures</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">deepMerge.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">const deepMerge = (...objects) =&gt; {
+  const isObject = (obj) =&gt; 
+    obj &amp;&amp; typeof obj === "object" &amp;&amp; !Array.isArray(obj);
+    
+  return objects.reduce((acc, obj) =&gt; {
+    if (!isObject(obj)) return acc;
+    
+    Object.keys(obj).forEach((key) =&gt; {
+      if (isObject(acc[key]) &amp;&amp; isObject(obj[key])) {
+        acc[key] = deepMerge(acc[key], obj[key]);
+      } else {
+        acc[key] = obj[key];
+      }
+    });
+    return acc;
+  }, {});
+};
+
+// Usage Example
+const obj1 = { a: 1, b: { c: 2, d: 3 } };
+const obj2 = { b: { d: 4, e: 5 }, f: 6 };
+const merged = deepMerge(obj1, obj2);
+// Result: { a: 1, b: { c: 2, d: 4, e: 5 }, f: 6 }</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <h3>Try it out</h3>
+          <div class="input-group">
+            <label>Object 1:</label>
+            <textarea id="merge-input1">{"a": 1, "b": {"c": 2}}</textarea>
+          </div>
+          <div class="input-group">
+            <label>Object 2:</label>
+            <textarea id="merge-input2">{"b": {"d": 3}, "e": 4}</textarea>
+          </div>
+          <button>Merge Objects</button>
+          <div class="result-box" id="merge-result">Enter objects above and click merge...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color Picker Section -->
+    <div id="color-picker" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-palette"></i> Color Picker</h2>
+        <p>Interactive color selection with multiple format outputs</p>
+      </div>
+      <div class="demo-container" style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+        <div style="text-align: center; color: #888; font-size: 1.2em;">
+          <i class="fas fa-clock" style="font-size: 2em; margin-bottom: 10px; display: block;"></i>
+          Coming Soon...
+        </div>
+      </div>
+    </div>
+
+    <!-- Password Generator Section -->
+    <div id="password-generator" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-key"></i> Password Generator</h2>
+        <p>Generate secure passwords with customizable options</p>
+      </div>
+      <div class="demo-container">
+        <div class="code-block">
+          <div class="code-header">password-generator.js</div>
+          <div class="code-content">
+            <pre><code class="language-javascript">class PasswordGenerator {
+  constructor() {
+    this.charsets = {
+      uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+      lowercase: 'abcdefghijklmnopqrstuvwxyz',
+      numbers: '0123456789',
+      symbols: '!@#$%^&amp;*()_+-=[]{}|;:,.&lt;&gt;?'
+    };
+  }
+
+  generatePassword(options = {}) {
+    const {
+      length = 12,
+      includeUppercase = true,
+      includeLowercase = true,
+      includeNumbers = true,
+      includeSymbols = false
+    } = options;
+
+    let charset = '';
+    if (includeUppercase) charset += this.charsets.uppercase;
+    if (includeLowercase) charset += this.charsets.lowercase;
+    if (includeNumbers) charset += this.charsets.numbers;
+    if (includeSymbols) charset += this.charsets.symbols;
+
+    if (charset === '') {
+      throw new Error('At least one character type must be selected');
+    }
+
+    let password = '';
+    for (let i = 0; i &lt; length; i++) {
+      password += charset.charAt(Math.floor(Math.random() * charset.length));
+    }
+
+    return password;
+  }
+
+  calculateStrength(password) {
+    let score = 0;
+    let feedback = [];
+
+    // Length check
+    if (password.length >= 8) score += 25;
+    else feedback.push('Use at least 8 characters');
+
+    // Character variety checks
+    if (/[a-z]/.test(password)) score += 25;
+    else feedback.push('Include lowercase letters');
+
+    if (/[A-Z]/.test(password)) score += 25;
+    else feedback.push('Include uppercase letters');
+
+    if (/[0-9]/.test(password)) score += 15;
+    else feedback.push('Include numbers');
+
+    if (/[^A-Za-z0-9]/.test(password)) score += 10;
+    else feedback.push('Include special characters');
+
+    let strength = 'Weak';
+    if (score >= 85) strength = 'Very Strong';
+    else if (score >= 70) strength = 'Strong';
+    else if (score >= 50) strength = 'Medium';
+
+    return { score, strength, feedback };
+  }
+
+  updateDisplay(password) {
+    const outputElement = document.getElementById('password-output');
+    const strengthFill = document.getElementById('strength-fill');
+    const strengthText = document.getElementById('strength-text');
+
+    if (outputElement) outputElement.textContent = password;
+
+    const { score, strength } = this.calculateStrength(password);
+
+    if (strengthFill) {
+      strengthFill.style.width = `${score}%`;
+      strengthFill.style.backgroundColor = 
+        score >= 85 ? '#4CAF50' : 
+        score >= 70 ? '#8BC34A' : 
+        score >= 50 ? '#FFC107' : '#FF5722';
+    }
+
+    if (strengthText) strengthText.textContent = strength;
+  }
+}
+
+// Usage
+const passwordGen = new PasswordGenerator();
+
+const generatePassword = () => {
+  const length = document.getElementById('length-slider')?.value || 12;
+  const includeUppercase = document.getElementById('uppercase')?.checked || false;
+  const includeLowercase = document.getElementById('lowercase')?.checked || false;
+  const includeNumbers = document.getElementById('numbers')?.checked || false;
+  const includeSymbols = document.getElementById('symbols')?.checked || false;
+
+  try {
+    const password = passwordGen.generatePassword({
+      length: parseInt(length),
+      includeUppercase,
+      includeLowercase,
+      includeNumbers,
+      includeSymbols
+    });
+
+    passwordGen.updateDisplay(password);
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
+// HTML needed: range input with id="length-slider", checkboxes with respective ids,
+// output div with id="password-output", strength bar elements</code></pre>
+          </div>
+        </div>
+        <div class="demo-panel">
+          <div class="password-generator">
+            <div class="password-options">
+              <div class="input-group">
+                <label>Password Length:</label>
+                <input type="range" id="length-slider" min="4" max="50" value="12">
+                <span id="length-display">12</span>
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="uppercase" checked>
+                <label for="uppercase">Include Uppercase Letters</label>
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="lowercase" checked>
+                <label for="lowercase">Include Lowercase Letters</label>
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="numbers" checked>
+                <label for="numbers">Include Numbers</label>
+              </div>
+              <div class="option-group">
+                <input type="checkbox" id="symbols">
+                <label for="symbols">Include Symbols</label>
+              </div>
+            </div>
+            <button>Generate Password</button>
+            <div class="password-output" id="password-output">Click generate to create a password</div>
+            <div class="password-strength">
+              <span>Strength:</span>
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <span id="strength-text">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JSON Formatter Section -->
+    <div id="json-formatter" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-code"></i> JSON Formatter</h2>
+        <p>Format, validate, and beautify JSON data</p>
+      </div>
+      <div class="demo-container" style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+        <div style="text-align: center; color: #888; font-size: 1.2em;">
+          <i class="fas fa-clock" style="font-size: 2em; margin-bottom: 10px; display: block;"></i>
+          Coming Soon...
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Password Manager Section -->
+    <div id="password-manager" class="feature-section">
+      <div class="feature-header">
+        <h2><i class="fas fa-lock"></i> Personal Password Manager</h2>
+        <p>Use local storage to keep track of your passwords</p>
+      </div>
+      <div class="demo-container" style="display: flex; justify-content: center; align-items: center; min-height: 200px;">
+        <div style="text-align: center; color: #888; font-size: 1.2em;">
+          <i class="fas fa-clock" style="font-size: 2em; margin-bottom: 10px; display: block;"></i>
+          Coming Soon...
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
